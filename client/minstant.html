@@ -1,0 +1,127 @@
+<head>
+  <title>minstant</title>
+</head>
+
+<body>
+</body>
+
+<!-- this is the main template used by iron:router to build the page -->
+<template name="ApplicationLayout">
+	{{> yield "header"}}
+	
+	<div class="container">
+	{{> yield "main"}}
+	</div>
+</template>
+
+<!-- top level template for the nav bar -->
+<template name="navbar">
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">
+        Minstant!
+      </a>
+    </div>
+    <div class="nav navbar-nav">
+    {{> loginButtons}}
+</div>
+  </div>
+</nav>
+</template>
+
+<!-- Top level template for the lobby page -->
+<template name="lobby_page">
+	{{> available_user_list}}
+</template>
+
+<!-- display a list of users -->
+<template name="available_user_list">
+	<h2>Choose someone to chat with:</h2>
+	<div class="row">
+	{{#each users}}
+	{{> available_user}}
+	{{/each}}
+</div>
+</template>
+
+<!-- display an individual user -->
+<template name="available_user">
+	<div class="col-md-2">
+		<div class="user_avatar">
+			{{#if isMyUser _id}} 
+			<div class="bg-success">{{getUsername _id}} (YOU)
+				<br/>
+				<img src="/{{profile.avatar}}" class="avatar_img">			
+			</div>
+			{{else}}
+			<a href="/chat/{{_id}}">
+				{{getUsername _id}}
+				<br/>
+				<img src="/{{profile.avatar}}" class="avatar_img">
+			</a>
+			{{/if}}
+		</div>
+	</div>
+</template>
+
+<template name="emoticon">
+	 <div class = "modal fade" id = "emoticon_bar">
+	      <div class = "modal-dialog">
+	        <div class = "modal-content">     
+
+	          <div class = "modal-body">
+	          	<div class = "container">
+	             {{#each emoji_display}}
+					<a href = "#" class = "js-emoticon-chat"> {{this.emoji}} </a>
+				 {{/each}}	
+				</div>
+	          </div> <!-- / modal-body -->
+	          <div class = "modal-footer">
+	            <button class= "btn btn-warning" data-dismiss = "modal"> Done </button>
+	          </div> <!-- / modal-footer -->
+
+	        </div> <!-- /modal content -->
+	      </div><!-- /modal dialog -->
+	</div> <!-- /modal fade -->
+</template>
+
+
+
+<!-- Top level template for the chat page -->
+<template name="chat_page">
+	<h2>Type in the box below to send a message!</h2>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="well well-lg">
+			{{#each messages}}
+			{{> chat_message}}
+			{{/each}}
+			</div>	
+		</div>
+	</div>
+    <div class="row">
+		<div class="col-md-12">
+			<form class="js-send-chat">
+				<input class="input" type="text" name="chat" id = "message" placeholder="type a message here...">
+				<button class="btn btn-default">send</button>
+			</form>
+		</div>
+	</div>
+
+	<button class="btn btn-success js-show-emoticons">Emoticons</button>
+		{{> emoticon}}
+</template>
+
+<!-- simple template that displays a message -->
+<template name="chat_message">
+<img src = "/{{avatar_image senderID}}" class ="avatar-thumbnail"> : {{text}} 
+	<br>
+	<br>
+</template>
+
+
+
+
+
+
