@@ -23,4 +23,3 @@ Some notes to use the application :
 
 The application uses Meteor methods and publish to write and access to the databses, so the application is secure!
 
-![We Vote USA](Color_world_map.png)
