@@ -5,6 +5,7 @@ The application uses the framework Meteor.
 
 To run the application, you need to install Meteor.
 
+
 Steps :
 
 Just open the terminal in the folder of the application and use command :
@@ -21,3 +22,5 @@ Some notes to use the application :
 - Open the application in another window or on a different browser and log in as the other user to proceed the chat started. 
 
 The application uses Meteor methods and publish to write and access to the databses, so the application is secure!
+
+![We Vote USA](Color_world_map.png)
